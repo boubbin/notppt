@@ -1,0 +1,26 @@
+#wrapper
+{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    bottom: 25%
+}
+
+#topmenu 
+{
+    height: 15%;
+    width: 100%;
+    background-color: blue;
+}
+
+#leftmenu
+{
+    display: inline;
+    float: left;
+    overflow: scroll;  
+    overflow-x: hidden;
+	height: 450px;
+}

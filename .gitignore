@@ -1,0 +1,8 @@
+# Bootstrap
+app/bootstrap.php.cache
+
+app/logs/
+app/cache/
+
+
+app/config/parameters.ini

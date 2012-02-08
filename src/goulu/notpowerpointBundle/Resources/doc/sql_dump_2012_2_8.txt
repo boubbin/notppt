@@ -1,0 +1,21 @@
+CREATE TABLE slide (
+    id VARCHAR(255) NOT NULL,
+    slideshowid VARCHAR(255) NOT NULL,
+    slidenumber INT NOT NULL,
+    creationdate DATETIME NOT NULL,
+    modifieddate DATETIME NOT NULL,
+    content LONGTEXT NOT NULL,
+    `show` TINYINT(1) NOT NULL,
+    deleted TINYINT(1) NOT NULL,
+    PRIMARY KEY(id)
+) ENGINE = InnoDB;
+
+CREATE TABLE slideshow (
+    id VARCHAR(255) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    creationdate DATETIME NOT NULL,
+    modifieddate DATETIME NOT NULL,
+    published TINYINT(1) NOT NULL,
+    deleted TINYINT(1) NOT NULL,
+    PRIMARY KEY(id)
+) ENGINE = InnoDB

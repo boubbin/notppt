@@ -30,10 +30,8 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
 	$(".slide").click( function() {
-		$.post("http://users.metropolia.fi/~tuomasva/inssityo/lol.php", { name: "John", time: "2pm" },
-			function(data) {
-				console.log(data);
-			}
-		);
+		$.get("/goulu/notppt/web/bundles/goulunotpowerpoint/css/newslideshow.css", function (data) {
+				$("#slide_content").html(data)
+		});
 	});
 });

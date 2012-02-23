@@ -29,8 +29,9 @@ $(document).ready(function() {
     });
 });
 $(document).ready(function() {
-	$(".slide").live("click", function() {
-		var slide_html = $(this).html();
-		$("#slide_content").html(slide_html);
+	$(".slide").click( function() {
+		$.get("/goulu/notppt/web/bundles/goulunotpowerpoint/css/newslideshow.css", function (data) {
+				$("#slide_content").html(data)
+		});
 	});
 });

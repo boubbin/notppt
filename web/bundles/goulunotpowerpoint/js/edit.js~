@@ -29,9 +29,11 @@ $(document).ready(function() {
     });
 });
 $(document).ready(function() {
-	$(".slide").live("click", function() {
-	    
-		var slide_html = $(this).html();
-		$("#slide_content").html(slide_html);
+	$(".slide").click( function() {
+		$.post("http://users.metropolia.fi/~tuomasva/inssityo/lol.php", { name: "John", time: "2pm" },
+			function(data) {
+				console.log(data);
+			}
+		);
 	});
 });

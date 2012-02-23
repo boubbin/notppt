@@ -2,6 +2,9 @@
 <html>
     <head>
         <link href="{{ asset('bundles/goulunotpowerpoint/css/newslideshow.css') }}" type="text/css" rel="stylesheet" />
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/edit.js') }}" /></script>
         <title>This is not powerpoint</title>
     </head>
     <body>
@@ -10,15 +13,15 @@
                 MENUBUTTONS
             </div>
             <div id="leftmenu">
-                <div id="slide_1" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
+                <div class="slide" id="slide_1" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
                     olen slaidi
                 </div>
-                <div id="slide_2" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    olen slaidi
+                <div class="slide" id="slide_2" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
+                    olen slaikkari
                 </div>
             </div>
 
-            <div id="content">
+            <div id="slide_content">
                 hei, olen sisältö
             </div>
         </div>

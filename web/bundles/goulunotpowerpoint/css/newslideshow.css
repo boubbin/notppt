@@ -1,10 +1,10 @@
 #wrapper
 {
     position: absolute;
-    width: 600px;
-    height: 400px;
-    top: 25%;
-    left: 25%;
+    width: 1000px;
+    height: 600px;
+    top: 10%;
+    left: 5%;
     right: 25%;
     bottom: 25%
 }
@@ -13,7 +13,7 @@
 {
     height: 15%;
     width: 100%;
-    background-color: blue;
+    background-color: #5C7AF2;
 }
 
 #leftmenu
@@ -22,5 +22,9 @@
     float: left;
     overflow: scroll;  
     overflow-x: hidden;
-	height: 450px;
+    height: 450px;
+}
+.slide 
+{
+    cursor: pointer;
 }

@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use goulu\notpowerpointBundle\Entity\Slideshow;
 use goulu\notpowerpointBundle\Entity\Slide;
 
+
+
 class ajaxController extends Controller
 {
      /**
@@ -23,8 +25,8 @@ class ajaxController extends Controller
         $id           = $request->request->get('id');
         $name         = $request->request->get('name');
         $slides       = $request->request->get('slides');
-        $creationdate = date("Y-m-d H:i:s", time());
-        $modifieddate = date("Y-m-d H:i:s", time());
+        $creationdate = new \DateTime();
+        $modifieddate = new \DateTime();
         foreach($slides as $i => $value)
         {
             $slide = new Slide();
@@ -32,17 +34,18 @@ class ajaxController extends Controller
             $slide->setSlidenumber($i);
             $slide->setContent($value);
             $slide->setSlideshowid($id);
-            $slide->setCreationdate(date("Y-m-d H:i:s", time()));
-            $slide->setModifieddate(date("Y-m-d H:i:s", time()));
+            $slide->setCreationdate($creationdate);
+            $slide->setModifieddate($modifieddate);
             $slide->setDeleted(0);
             $slide->setShow(1);
-            $slideshow->addSlide($slide);
+            $em->persist($slide);
         }
         $slideshow->setName($name);
         $slideshow->setId($id);
         $slideshow->setCreationdate($creationdate);
         $slideshow->setModifieddate($modifieddate);
         $slideshow->setPublished(1);
+        $slideshow->setDeleted(0);
                 
         $em->persist($slideshow);
         $em->flush();

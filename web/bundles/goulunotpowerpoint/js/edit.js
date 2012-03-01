@@ -86,7 +86,7 @@ function makeClassDraggable(element_class) {
     });
 }
 function saveSlideShow() {
-    var id      = ":si on pieni";
+    var id      = Math.random()*9000000;
     var content = $("#slide_content").html();
     var slides  = new Array(content, content, content, content, content, content);
     $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {

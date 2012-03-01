@@ -41,8 +41,6 @@ class Slideshow
     protected $deleted;
     
     /**
-     *@ORM\OneToMany(targetEntity="Slide", mappedBy="slideshow")
-     * @ORM\OrderBy({"slidenumber" = "ASC"})
      * @var ArrayCollection $slides
      */
     protected $slides;  

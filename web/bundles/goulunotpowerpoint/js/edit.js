@@ -24,7 +24,7 @@ $(document).ready(function() {
             } else if (clicked_button == "element_other") {
                 // add somethig other
             } else if (clicked_button == "save") {
-                saveSlideshow();
+                saveSlideShow();
             }
         });
         
@@ -87,11 +87,13 @@ function makeClassDraggable(element_class) {
 }
 function saveSlideShow() {
     var id      = ":si on pieni";
-    var content = $(".slide_1").html();
-    $.post("notppt/web/app_dev.php/ajax/slideshow/save", {
+    var content = $("#slide_content").html();
+    var slides  = new Array(content, content, content, content, content, content);
+    $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {
         id     : id,
-        content: content 
+        name   : "Slideshown nimi",
+        slides: slides
     }, function(data) {
-        $("#slide_content").html(data);
+        $("#slide_content").append(data);
     });
 }

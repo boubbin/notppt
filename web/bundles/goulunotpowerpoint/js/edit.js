@@ -23,6 +23,8 @@ $(document).ready(function() {
                 // add image
             } else if (clicked_button == "element_other") {
                 // add somethig other
+            } else if (clicked_button == "save") {
+                saveSlideshow();
             }
         });
         
@@ -31,7 +33,8 @@ $(document).ready(function() {
 
 
 function getNewTextElement() {
-    return $('<span class="element_text new_element draggable">Text element</span>');
+    var as = getActiveSlide();
+    return $('<span class="'+as+' element_text new_element draggable">Text element</span>');
 }
 
 function getActiveSlide() {
@@ -80,5 +83,15 @@ function makeClassDraggable(element_class) {
         stop: function() {
 
         }
+    });
+}
+function saveSlideShow() {
+    var id      = ":si on pieni";
+    var content = $(".slide_1").html();
+    $.post("notppt/web/app_dev.php/ajax/slideshow/save", {
+        id     : id,
+        content: content 
+    }, function(data) {
+        $("#slide_content").html(data);
     });
 }

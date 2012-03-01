@@ -4,6 +4,8 @@
         <link href="{{ asset('bundles/goulunotpowerpoint/css/newslideshow.css') }}" type="text/css" rel="stylesheet" />
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.hilightfade.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.jeditable.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/edit.js') }}" /></script>
         <title>This is not powerpoint</title>
     </head>
@@ -11,19 +13,27 @@
         <div id="wrapper">
             <div id="topmenu">
                 MENUBUTTONS
+                <div id="buttonmenu">
+                    <span class="button" id="element_text">       Text </span>
+                    <span class="button" id="element_rectangular">Neliö</span>
+                    <span class="button" id="element_picture">    Kuva </span>
+                    <span class="button"></span>
+                    <span class="button"></span>
+                    <span class="button"></span>
+                </div>
             </div>
             <div id="leftmenu">
-                <div class="slide" id="slide_1" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    olen slaidi
-                </div>
-                <div class="slide" id="slide_2" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    olen slaikkari
+                <div id="slide_1" class="slide_selection" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
+                    <span class="slide_selection_content">Slide 1</span>
                 </div>
             </div>
 
-            <div id="slide_content">
-                hei, olen sisältö
+            <div id="content_wrapper">
+                <div id="slide_content">
+                    hei, olen sisältö
+                </div>
             </div>
         </div>
+        <div id="currentlyActiveslide">slide_1</div>
     </body>
 </html>

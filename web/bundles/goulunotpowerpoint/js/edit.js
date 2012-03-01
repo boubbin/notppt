@@ -4,34 +4,81 @@
 */
 
 $(document).ready(function() {
-    $(".draggable-item").each(function() {
-        $(this).draggable({
-            cursor         : 'move',
-            containment    : '#slide_content',
-            stack          : "#slide_content div",
-            snap           : true,
-            snapTolerance  : 3,
-            start: function() {
-                // this function body is excuted when
-                // dragging starts
-            },
-            drag: function() {
-                // this function body is executed while
-                // dragging
-                // $("#content").html(myescape($("#slides").html()));
-            },
-            stop: function() {
-                // this function body is executed when
-                // dragging stops
-                // $("#content").html(myescape($("#slides").html()));
+	$(".slide_selection").click( function() {
+            clearContent();
+            setActiveSlide($(this).attr("id"));
+            // show slide content
+	});
+        $("#buttonmenu .button").click(function() {
+            removeNewElementDecorationFromNewElement();
+            var clicked_button = $(this).attr("id");
+            if (clicked_button == "element_text") {
+                var new_element = getNewTextElement();
+                addNewElementToContent(new_element);
+                makeElementEditable(new_element);
+                makeNewElementDraggable();
+            } else if (clicked_button == "element_rectangular") {
+                // add rect shape
+            } else if (clicked_button == "element_image") {
+                // add image
+            } else if (clicked_button == "element_other") {
+                // add somethig other
             }
         });
+        
+        setActiveSlide($(this).attr("slide_1"));
+});
+
+
+function getNewTextElement() {
+    return $('<span class="element_text new_element draggable">Text element</span>');
+}
+
+function getActiveSlide() {
+    return $("#currentlyActiveSlide").html();
+};
+function setActiveSlide(id) {
+    $("#currentlyActiveSlide").html(id);
+};
+function clearContent() {
+    $("#slide_content").empty();
+}
+function getContentId() {
+    return "#slide_content";
+}
+function addNewElementToContent(new_element) {
+    var content = getContentId();
+    $(content).append(new_element); 
+    $(".new_element").highlightFade({speed:2000,iterator:'exponential'});
+}
+function removeNewElementDecorationFromNewElement() {
+    $(".new_element").removeClass("new_element");
+}
+
+function makeAllDraggable() {
+    makeClassDraggable(".draggable");
+}
+function makeElementEditable(element) {
+    $(element).editable();
+}
+function makeNewElementDraggable() {
+    makeClassDraggable(".draggable");   
+}
+function makeClassDraggable(element_class) {
+    $(element_class).draggable({
+        cursor         : 'move',
+        containment    : '#slide_content',
+        stack          : "#slide_content div",
+        snap           : true,
+        snapTolerance  : 3,
+        start: function() {
+            removeNewElementDecorationFromNewElement();
+        },
+        drag: function() {
+            
+        },
+        stop: function() {
+
+        }
     });
-});
-$(document).ready(function() {
-	$(".slide").click( function() {
-		$.get("/goulu/notppt/web/bundles/goulunotpowerpoint/css/newslideshow.css", function (data) {
-				$("#slide_content").html(data)
-		});
-	});
-});
+}

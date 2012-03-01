@@ -4,6 +4,7 @@
         <link href="{{ asset('bundles/goulunotpowerpoint/css/newslideshow.css') }}" type="text/css" rel="stylesheet" />
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" />
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" />
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.hilightfade.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/edit.js') }}" />
         <title>This is not powerpoint</title>
     </head>
@@ -12,18 +13,29 @@
             Slideshow title: {{ slideshow.name }}
             <div id="topmenu">
                 MENUBUTTONS
+                <div id="buttonmenu">
+                    <span class="menubutton">Text </span>
+                    <span class="menubutton">Neliö</span>
+                    <span class="menubutton">Kuva </span>
+                    <span class="menubutton"></span>
+                    <span class="menubutton"></span>
+                    <span class="menubutton"></span>
+                </div>
             </div>
             <div id="leftmenu">
                 {% for slide in slides %}
-                <div id="slide_{{ slide.id }}" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
+                <div id="slide_{{ slide.id }}" class="slide_selection" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
                     olen slaidi numero={{ slide.slidenumber }}
                 </div>
                 {% endfor %}
             </div>
 khkhkhkjhklh
-            <div id="content">
-                hei, olen sisältö
+            <div id="content_wrapper">
+                <div id="slide_content">
+                    hei, olen sisältö
+                </div>
             </div>
         </div>
+        <div id="currentlyActiveslide">slide_1</div>
     </body>
 </html>

@@ -15,7 +15,12 @@ class indexController extends Controller
     
     public function indexAction()
     {
-        //return array('name' => $name);
-        return $this->render('goulunotpowerpointBundle:index:index.html.twig');
+        $em = $this->getDoctrine()->getEntityManager();
+        $slideshows = $em->getRepository('goulunotpowerpointBundle:Slideshow')->getAllSlideshows();
+        if (!$slideshows) 
+        {
+            throw $this->createNotFoundException('Unable to find Slideshows.');
+        }
+        return $this->render('goulunotpowerpointBundle:index:index.html.twig', array('slideshows' => $slideshows));
     }
 }

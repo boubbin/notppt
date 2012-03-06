@@ -25,11 +25,14 @@ class slideshowController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $slideshow = $em->getRepository('goulunotpowerpointBundle:Slideshow')->find($id);
-        $slides = $em->getRepository('goulunotpowerpointBundle:Slide')
-                ->getBySlideshowId($slideshow->getId());
         if (!$slideshow) 
         {
             throw $this->createNotFoundException('Unable to find Slideshow.');
+        }
+        else
+        {
+            $slides = $em->getRepository('goulunotpowerpointBundle:Slide')
+                ->getBySlideshowId($slideshow->getId());
         }
 
         return $this->render('goulunotpowerpointBundle:slideshow:edit.html.twig', 

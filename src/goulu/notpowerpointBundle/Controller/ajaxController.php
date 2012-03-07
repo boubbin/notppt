@@ -25,6 +25,7 @@ class ajaxController extends Controller
         $id           = $request->request->get('id');
         $name         = $request->request->get('name');
         $slides       = $request->request->get('slides');
+        print_r($slides);
         $creationdate = new \DateTime();
         $modifieddate = new \DateTime();
         foreach($slides as $i => $value)

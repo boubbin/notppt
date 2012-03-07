@@ -40,13 +40,13 @@ function saveSlideShow() {
         slide_array = {
             id       : null,
             ord      : num,
-            duration : Math.random()*900,
+            duration : Math.random()*9,
             showable : 1,
             content : $(element).html()
         };
-        slides[num] = $.param(slide_array);
+
+        slides[num] = slide_array;
     });
-    console.log(slides);
     $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {
         id     : id,
         name   : name,

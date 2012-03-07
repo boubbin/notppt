@@ -48,7 +48,7 @@ function saveSlideShow() {
         slides[num] = slide_array;
     });
     $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {
-        id     : id,
+        id     : 'null',
         name   : name,
         slides : slides
     }, function(data) {

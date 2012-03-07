@@ -2,25 +2,44 @@
 <html>
     <head>
         <link href="{{ asset('bundles/goulunotpowerpoint/css/newslideshow.css') }}" type="text/css" rel="stylesheet" />
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.hilightfade.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.jeditable.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/edit.js') }}" /></script>
         <title>This is not powerpoint</title>
     </head>
     <body>
         <div id="wrapper">
             <div id="topmenu">
-                MENUBUTTONS
+
+                <div id="buttonmenu">
+                    <span class="button" id="add_slide"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/document_add.png') }}"/></span>
+                    <span class="button" id="element_text"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/file_edit.png') }}"/></span>
+                    <span class="button" id="element_rectangular"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/message.png') }}"/></span>
+                    <span class="button"></span>
+                    <span class="button"></span>
+                    <span class="button" id="save">Tallenna</span>
+                </div>
             </div>
             <div id="leftmenu">
-                <div id="slide_1" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    olen slaidi
+                <span class="slide_navigator_top">
+
+                </span>
+                <div class="slide_selection">
+
                 </div>
-                <div id="slide_2" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    olen slaidi
-                </div>
+                <span class="slide_navigator_bottom">
+
+                </span>
             </div>
 
-            <div id="content">
-                hei, olen sisältö
+            <div id="content_wrapper">
+                <div id="slide_content">
+                    
+                </div>
             </div>
         </div>
+        <div id="currentlyActiveSlide">slide_1</div>
     </body>
 </html>

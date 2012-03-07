@@ -1,0 +1,29 @@
+#menuwrapper
+{
+	text-align: center;
+	background-color: #E01B1B;
+	border: 1px solid;
+	width: 50%;
+	height: 200px;
+	margin: 0 auto;
+}
+
+#leftmenu
+{
+	background-color: #95ED98;
+	border: 1px solid;
+	width: 45%;
+    margin: 1% 1% 1% 1%;
+	top: 10px;
+	float: left;
+}
+
+#rightmenu
+{
+	background-color: #95ED98;
+	border: 1px solid;
+	width: 45%;
+    margin: 1% 1% 1% 1%;
+	top: 10px;
+	float: right;
+}

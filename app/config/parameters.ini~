@@ -1,0 +1,13 @@
+ [parameters]
+database_driver="pdo_mysql"
+database_host="localhost"
+database_port=""
+database_name="notppt"
+database_user="notppt"
+database_password="notppt"
+mailer_transport="smtp"
+mailer_host="localhost"
+mailer_user=""
+mailer_password=""
+locale="en"
+secret="bd440369561b8ee51eb2899c583b2dc1"

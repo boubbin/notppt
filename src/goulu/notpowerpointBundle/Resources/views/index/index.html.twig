@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="{{ asset('bundles/goulunotpowerpoint/css/index.css') }}" type="text/css" rel="stylesheet" />
         <title>This is not powerpoint</title>
     </head>
     <body>
-
-        <div id="leftmenu">
-            <a href="slideshow/new">Create new slideshow</a>
-        </div>
-        <div id="rightmenu">
-        
+        <div id="menuwrapper">
+            <div id="leftmenu">
+                <a href="slideshow/new">Create new slideshow</a>
+            </div>
+            <div id="rightmenu">
+                {% for show in slideshows %}
+                    Slideshow title: {{ show.name }}
+                    <a href="slideshow/edit/{{ show.id }}">Edit</a>
+                    <br/>
+                {% endfor %}
+            </div>
         </div>
     </body>
 </html>

@@ -4,7 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- *@ORM\Entity
+ *@ORM\Entity(repositoryClass="goulu\notpowerpointBundle\Repository\SlideshowRepository")
  * @ORM\Table(name="slideshow") 
  */
 class Slideshow
@@ -41,8 +41,6 @@ class Slideshow
     protected $deleted;
     
     /**
-     *@ORM\OneToMany(targetEntity="Slide", mappedBy="slideshow")
-     * @ORM\OrderBy({"slidenumber" = "ASC"})
      * @var ArrayCollection $slides
      */
     protected $slides;  

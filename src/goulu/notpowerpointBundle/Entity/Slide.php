@@ -43,7 +43,7 @@ class Slide
      /**
      * @ORM\Column(type="boolean")
      */    
-    protected $show;
+    protected $showable;
 
      /**
      * @ORM\Column(type="boolean")
@@ -178,7 +178,7 @@ class Slide
      */
     public function setShow($show)
     {
-        $this->show = $show;
+        $this->showable = $show;
     }
 
     /**
@@ -188,7 +188,7 @@ class Slide
      */
     public function getShow()
     {
-        return $this->show;
+        return $this->showable;
     }
 
     /**

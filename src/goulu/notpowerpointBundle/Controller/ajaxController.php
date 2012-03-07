@@ -22,11 +22,11 @@ class ajaxController extends Controller
         $id           = $request->request->get('id', 'null');
         if($id == 'null')
         {
-            saveNewSlideshow();
+            $this->saveNewSlideshow();
         }
         else
         {
-            UpdateExistingSlideshow($id);
+            $this->updateExistingSlideshow($id);
         }
     }
     /*
@@ -70,10 +70,10 @@ class ajaxController extends Controller
         $modifieddate = new \DateTime();
         foreach($slides as $slide)
         {
-            saveNewSlide($slide);
+            $this->saveNewSlide($slide);
         }
         $slideshow->setName($name);
-        $slideshow->setId(gen_uuid());
+        $slideshow->setId($this->gen_uuid());
         $slideshow->setCreationdate($creationdate);
         $slideshow->setModifieddate($modifieddate);
         $slideshow->setPublished(1);
@@ -104,7 +104,7 @@ class ajaxController extends Controller
             $em->persist($slideshow);
             foreach($slides as $slide)
             {
-                updateExistingSlide($slide);
+                $this->updateExistingSlide($slide);
             }
         }
         $em->flush();
@@ -116,7 +116,7 @@ class ajaxController extends Controller
         $dbslide = $em->getRepository('goulunotpowerpointBundle:Slide')->find($slide['id']);
         if(!$dbslide)
         {
-            saveNewSlide($slide);
+            $this->saveNewSlide($slide);
         }
         else
         {
@@ -136,7 +136,7 @@ class ajaxController extends Controller
         $slide->setId(gen_uuid());
         $slide->setSlidenumber($slide['ord']);
         $slide->setContent($slide['content']);
-        $slide->setSlideshowid(gen_uuid());
+        $slide->setSlideshowid($this->gen_uuid());
         $slide->setCreationdate($creationdate);
         $slide->setModifieddate($modifieddate);
         $slide->setDeleted(0);

@@ -38,7 +38,7 @@ function saveSlideShow() {
     var slide_array;
     $(".slide_wrapper").each(function(num, element) {
         slide_array = {
-            id       : null,
+            id       : 'null',
             ord      : num,
             duration : Math.random()*9,
             showable : 1,

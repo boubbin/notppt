@@ -28,37 +28,8 @@ class ajaxController extends Controller
         {
             $this->updateExistingSlideshow($id);
         }
+        return new Response("MOI");
     }
-    /*
-     * slides Array
-     * 
-     * 
-            (
-                [0] => Array
-                    (
-                        [id] => null
-                        [ord] => 0
-                        [duration] => 6.728902717746868
-                        [showable] => 1
-                        [content] => <span>sisltlöääöewlgökglödfskjlköj</span>
-                    )
-
-                [1] => Array
-                    (
-                        [id] => null
-                        [ord] => 1
-                        [duration] => 6.538086364151448
-                        [showable] => 1
-                        [content] => <span>sisltlöääöewlgökglödfskjlköj</span>
-                    )
-            )
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
     function saveNewSlideshow()
     {
         $slideshow = new Slideshow();
@@ -81,7 +52,6 @@ class ajaxController extends Controller
         $em->persist($slideshow);
         $em->flush();
     }
-    
     function updateExistingSlideshow($id)
     {
         $em = $this->getDoctrine()->getEntityManager();

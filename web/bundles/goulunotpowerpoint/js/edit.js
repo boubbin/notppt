@@ -32,13 +32,24 @@ $(document).ready(function() {
         // setActiveSlide($(this).attr(".slide_1"));
 });
 function saveSlideShow() {
-    var id      = null;
-    var content = $("#slide_content").html();
-    var slides  = new Array(content, content, content, content, content, content);
+    var id          = $("#slideshowId").val();
+    var name        = $("#slideshow_name").val();
+    var slides      = new Array();
+    var slide_array = new Array();
+    $(".slide_wrapper").each(function(num, element) {
+        console.log(num);
+        slide_array = new Array();
+        slide_array['id']       = null;
+        slide_array['ord']      = num;
+        slide_array['duration'] = Math.random()*900;
+        slide_array['showable'] = 1;
+        slide_array['content'] += $(element).html();
+        slides[num] = slide_array;
+    });
     $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {
         id     : id,
-        name   : "Slideshown nimi",
-        slides: slides
+        name   : name,
+        slides : slides
     }, function(data) {
         // tell everyone save went ok and stuff
     });
@@ -49,14 +60,14 @@ function getNewTextElement() {
     return $('<span class="'+as+' element_text new_element draggable">Text element</span>');
 }
 function getActiveSlide() {
-    if ($(".slide").length == 0) { return -1; }
+    if ($(".slide").length == 0) {return -1;}
     return $("#currentlyActiveSlide").html();
 };
 function setActiveSlide(id) {
     var as = getActiveSlide();
-    if (as == id) { return; }
-    if (as != "") { $("."+as).toggle(); }
-    if (id != "") { $("."+id).toggle(); }
+    if (as == id) {return;}
+    if (as != "") {$("."+as).toggle();}
+    if (id != "") {$("."+id).toggle();}
     $("#currentlyActiveSlide").html(id);
     $(".slide").removeClass("active_slide");
     $("#"+id).addClass("active_slide");
@@ -65,10 +76,12 @@ function clearContent() {
     // $("#slide_content").empty();
 }
 function getContentId() {
-    return "#slide_content";
+    var as = getActiveSlide();
+    return "#"+as+"_wrapper";
 }
 function addNewElementToContent(new_element) {
     var content = getContentId();
+    console.log("Will append to "+content);
     $(content).append(new_element); 
     $(".new_element").highlightFade({speed:2000,iterator:'exponential'});
 }
@@ -106,9 +119,11 @@ function makeClassDraggable(element_class) {
     });
 }
 function addNewSlide() {
-    var slide_num = getNumberForNewSlide();
-    var element   = $('<div class="slide" id="slide_'+slide_num+'">Slide '+slide_num+'<img class="remove_slide" src="/notppt/web/bundles/goulunotpowerpoint/img/icon/notification_remove.png"/></div>');
-    $(".slide_selection").append(element);
+    var slide_num                   = getNumberForNewSlide();
+    var new_slide_election_element  = $('<div class="slide" id="slide_'+slide_num+'">Slide '+slide_num+'<img class="remove_slide" src="/notppt/web/bundles/goulunotpowerpoint/img/icon/notification_remove.png"/></div>');
+    var new_slide_wrapper_element   = $('<div class="slide_wrapper" id="slide_'+slide_num+'_wrapper"></div>');
+    $(".slide_selection").append(new_slide_election_element);
+    $("#slide_content").append(new_slide_wrapper_element);
     setActiveSlide('slide_'+slide_num);
 }
 function getNumberForNewSlide() {

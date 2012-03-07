@@ -20,12 +20,13 @@ class ajaxController extends Controller
     {   
         $request      = $this->get('request');
         $id           = $request->request->get('id', 'null');
-        if($id == 'null')
+        if($id == 'null' | $id == '')
         {
             $this->saveNewSlideshow();
         }
         else
         {
+            return new Response('id= ' . $id);
             $this->updateExistingSlideshow($id);
         }
     }
@@ -101,16 +102,16 @@ class ajaxController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $modifieddate = new \DateTime();
         $creationdate = new \DateTime();
-        $slide = new Slide();
-        $slide->setId(gen_uuid());
-        $slide->setSlidenumber($slide['ord']);
-        $slide->setContent($slide['content']);
-        $slide->setSlideshowid($this->gen_uuid());
-        $slide->setCreationdate($creationdate);
-        $slide->setModifieddate($modifieddate);
-        $slide->setDeleted(0);
-        $slide->setShow($slide['showable']);
-        $em->persist($slide);
+        $dbslide = new Slide();
+        $dbslide->setId($this->gen_uuid());
+        $dbslide->setSlidenumber($slide['ord']);
+        $dbslide->setContent($slide['content']);
+        $dbslide->setSlideshowid($this->gen_uuid());
+        $dbslide->setCreationdate($creationdate);
+        $dbslide->setModifieddate($modifieddate);
+        $dbslide->setDeleted(0);
+        $dbslide->setShow($slide['showable']);
+        $em->persist($dbslide);
     }
     
     function gen_uuid() {

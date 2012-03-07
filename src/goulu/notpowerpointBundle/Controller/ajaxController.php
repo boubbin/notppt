@@ -22,43 +22,14 @@ class ajaxController extends Controller
         $id           = $request->request->get('id', 'null');
         if($id == 'null')
         {
-            saveNewSlideshow();
+            $this->saveNewSlideshow();
         }
         else
         {
-            UpdateExistingSlideshow($id);
+            $this->updateExistingSlideshow($id);
         }
+        return new Response("MOI");
     }
-    /*
-     * slides Array
-     * 
-     * 
-            (
-                [0] => Array
-                    (
-                        [id] => null
-                        [ord] => 0
-                        [duration] => 6.728902717746868
-                        [showable] => 1
-                        [content] => <span>sisltlöääöewlgökglödfskjlköj</span>
-                    )
-
-                [1] => Array
-                    (
-                        [id] => null
-                        [ord] => 1
-                        [duration] => 6.538086364151448
-                        [showable] => 1
-                        [content] => <span>sisltlöääöewlgökglödfskjlköj</span>
-                    )
-            )
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     */
     function saveNewSlideshow()
     {
         $slideshow = new Slideshow();
@@ -70,7 +41,7 @@ class ajaxController extends Controller
         $modifieddate = new \DateTime();
         foreach($slides as $slide)
         {
-            saveNewSlide($slide);
+            $this->saveNewSlide($slide);
         }
         $slideshow->setName($name);
         $slideshow->setId(gen_uuid());
@@ -81,7 +52,6 @@ class ajaxController extends Controller
         $em->persist($slideshow);
         $em->flush();
     }
-    
     function updateExistingSlideshow($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -104,7 +74,7 @@ class ajaxController extends Controller
             $em->persist($slideshow);
             foreach($slides as $slide)
             {
-                updateExistingSlide($slide);
+                $this->updateExistingSlide($slide);
             }
         }
         $em->flush();
@@ -116,7 +86,7 @@ class ajaxController extends Controller
         $dbslide = $em->getRepository('goulunotpowerpointBundle:Slide')->find($slide['id']);
         if(!$dbslide)
         {
-            saveNewSlide($slide);
+            $this->saveNewSlide($slide);
         }
         else
         {

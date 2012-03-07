@@ -28,7 +28,6 @@ class ajaxController extends Controller
         {
             $this->updateExistingSlideshow($id);
         }
-        return new Response("MOI");
     }
     function saveNewSlideshow()
     {

@@ -1,0 +1,29 @@
+<html>
+<body>
+    <head>
+        <title>This is not powerpoint</title>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.bxSlider.min.js') }}" /></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#slider1').bxSlider({
+                auto: true,
+                mode: 'fade',
+                speed: 2000,
+                pause: 5000,
+                startingSlide: 1,
+                controls: false
+            });
+        });
+        </script>
+    </head>
+    <ul id="slider1">
+        {% for slide in slides %}
+        <li style="background-color:lightblue; height: 100%; width: 100%; position: absolute;">
+            slidenumber = {{ slide.slidenumber }} <br/>
+            {{ slide.content }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

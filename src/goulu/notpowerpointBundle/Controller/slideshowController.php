@@ -27,10 +27,9 @@ class slideshowController extends Controller
                 ->getBySlideshowId($slideshow->getId());
         }
 
-        return $this->render('goulunotpowerpointBundle:slideshow:edit.html.twig', 
+        return $this->render('goulunotpowerpointBundle:slideshow:show.html.twig', 
                 array('slideshow' => $slideshow,
                       'slides' => $slides));
-        return $this->render('goulunotpowerpointBundle:slideshow:new.html.twig', array('slideshow', $slideshow));
     }
     
     /**

@@ -1,29 +1,24 @@
 <?php
-
 namespace goulu\notpowerpointBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- *@ORM\Entity(repositoryClass="goulu\notpowerpointBundle\Repository\SlideRepository")
- * @ORM\Table(name="slide") 
+ *@ORM\Entity(repositoryClass="goulu\notpowerpointBundle\Repository\SlideshowRepository")
+ * @ORM\Table(name="slideshow") 
  */
-class Slide
+class Slideshow
 {
      /**
      * @ORM\Id
      * @ORM\Column(type="string")
      */
     protected $id;
-  
+            
      /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=30)
      */
-    protected $slideshowid;
-    
-     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $slidenumber;    
+    protected $name;
     
      /**
      * @ORM\Column(type="datetime")
@@ -36,21 +31,26 @@ class Slide
     protected $modifieddate;
     
      /**
-     * @ORM\Column(type="text")
-     */    
-    protected $content;
+     * @ORM\Column(type="boolean")
+     */
+    protected $published;
     
      /**
      * @ORM\Column(type="boolean")
      */    
-    protected $showable;
-
-     /**
-     * @ORM\Column(type="boolean")
-     */    
-    protected $deleted;            
-              
-
+    protected $deleted;
+    
+    /**
+     * @var ArrayCollection $slides
+     */
+    protected $slides;  
+            
+    
+    public function __construct()
+    {
+        $this->slides = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Set id
      *
@@ -72,43 +72,23 @@ class Slide
     }
 
     /**
-     * Set slideshowid
+     * Set name
      *
-     * @param string $slideshowid
+     * @param string $name
      */
-    public function setSlideshowid($slideshowid)
+    public function setName($name)
     {
-        $this->slideshowid = $slideshowid;
+        $this->name = $name;
     }
 
     /**
-     * Get slideshowid
+     * Get name
      *
      * @return string 
      */
-    public function getSlideshowid()
+    public function getName()
     {
-        return $this->slideshowid;
-    }
-
-    /**
-     * Set slidenumber
-     *
-     * @param integer $slidenumber
-     */
-    public function setSlidenumber($slidenumber)
-    {
-        $this->slidenumber = $slidenumber;
-    }
-
-    /**
-     * Get slidenumber
-     *
-     * @return integer 
-     */
-    public function getSlidenumber()
-    {
-        return $this->slidenumber;
+        return $this->name;
     }
 
     /**
@@ -152,43 +132,23 @@ class Slide
     }
 
     /**
-     * Set content
+     * Set published
      *
-     * @param text $content
+     * @param boolean $published
      */
-    public function setContent($content)
+    public function setPublished($published)
     {
-        $this->content = $content;
+        $this->published = $published;
     }
 
     /**
-     * Get content
-     *
-     * @return text 
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Set show
-     *
-     * @param boolean $show
-     */
-    public function setShow($show)
-    {
-        $this->showable = $show;
-    }
-
-    /**
-     * Get show
+     * Get published
      *
      * @return boolean 
      */
-    public function getShow()
+    public function getPublished()
     {
-        return $this->showable;
+        return $this->published;
     }
 
     /**
@@ -212,22 +172,22 @@ class Slide
     }
 
     /**
-     * Set showable
+     * Add slides
      *
-     * @param boolean $showable
+     * @param goulu\notpowerpointBundle\Entity\Slide $slides
      */
-    public function setShowable($showable)
+    public function addSlide(\goulu\notpowerpointBundle\Entity\Slide $slides)
     {
-        $this->showable = $showable;
+        $this->slides[] = $slides;
     }
 
     /**
-     * Get showable
+     * Get slides
      *
-     * @return boolean 
+     * @return Doctrine\Common\Collections\Collection 
      */
-    public function getShowable()
+    public function getSlides()
     {
-        return $this->showable;
+        return $this->slides;
     }
 }

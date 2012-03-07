@@ -6,6 +6,7 @@ CREATE TABLE slide (
     modifieddate DATETIME NOT NULL,
     content LONGTEXT NOT NULL,
     showable TINYINT(1) NOT NULL,
+    duration INT(10) NOT NULL,
     deleted TINYINT(1) NOT NULL,
     PRIMARY KEY(id)
 ) ENGINE = InnoDB;

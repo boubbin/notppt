@@ -12,28 +12,34 @@
     <body>
         <div id="wrapper">
             <div id="topmenu">
-                MENUBUTTONS
+
                 <div id="buttonmenu">
-                    <span class="button" id="element_text">       Text </span>
-                    <span class="button" id="element_rectangular">Neliö</span>
-                    <span class="button" id="element_picture">    Kuva </span>
+                    <span class="button" id="add_slide"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/document_add.png') }}"/></span>
+                    <span class="button" id="element_text"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/file_edit.png') }}"/></span>
+                    <span class="button" id="element_rectangular"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/message.png') }}"/></span>
                     <span class="button"></span>
                     <span class="button"></span>
                     <span class="button" id="save">Tallenna</span>
                 </div>
             </div>
             <div id="leftmenu">
-                <div id="slide_1" class="slide_selection" style="background-color: gray; height: 100px; width: 100px; margin: 10px">
-                    <span class="slide_selection_content">Slide 1</span>
+                <span class="slide_navigator_top">
+
+                </span>
+                <div class="slide_selection">
+
                 </div>
+                <span class="slide_navigator_bottom">
+
+                </span>
             </div>
 
             <div id="content_wrapper">
                 <div id="slide_content">
-                    hei, olen sisältö
+                    
                 </div>
             </div>
         </div>
-        <div id="currentlyActiveslide">slide_1</div>
+        <div id="currentlyActiveSlide">slide_1</div>
     </body>
 </html>

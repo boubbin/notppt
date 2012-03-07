@@ -12,6 +12,7 @@
             <div id="rightmenu">
                 {% for show in slideshows %}
                     Slideshow title: {{ show.name }}
+                    <a href="slideshow/show/{{ show.id }}">Show</a>
                     <a href="slideshow/edit/{{ show.id }}">Edit</a>
                     <br/>
                 {% endfor %}

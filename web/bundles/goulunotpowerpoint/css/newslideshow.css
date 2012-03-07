@@ -25,8 +25,12 @@
     height: 90%;
 }
 #content_wrapper {
+
+    float: left;
     height: 100%;
-    width: 100%;
+    left: 133px;
+    position: absolute;
+    width: 865px;
 }
 #slide_content {
     width: 100%;
@@ -83,11 +87,17 @@
     margin: 26px, 1px;
     padding: 5px 4px;
     position: relative;
-    top: 40px;
+    top: 15px;
     width: 32px;
 }
+#editor_toolbar {
+
+}
+#editor_toolbar .editor_item {
+    position: relative;
+}
 .draggable {
-    left: 50%;
+    left: 41%;
     position: absolute;
     top: 50%;  
 }
@@ -100,4 +110,7 @@
 }
 .active_slide {
     background-color: yellow;
+}
+.element_dragging {
+    border:1px dashed;
 }

@@ -12,16 +12,20 @@
     <body>
         <div id="wrapper">
             <div id="topmenu">
-
+                <div id="editor_toolbar">
+                    <span class="editor_item" id="slide_name">Esityksen nimi: <input type="text" id="slideshow_name" value="My Slideshow"></span>
+                    <span class="editor_item" id="editor_item2">Pohja <select><option>Oletus</option><option>Markiisi</option></select></span>
+                    <span class="editor_item" id="editor_item3"></span>
+                </div>
                 <div id="buttonmenu">
                     <span class="button" id="add_slide"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/document_add.png') }}"/></span>
                     <span class="button" id="element_text"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/file_edit.png') }}"/></span>
                     <span class="button" id="element_rectangular"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/message.png') }}"/></span>
                     <span class="button"></span>
                     <span class="button"></span>
-                    <span class="button" id="save">Tallenna</span>
+                    <span class="button" id="save"><img src="{{ asset('bundles/goulunotpowerpoint/img/icon/diskette.png') }}"/></span>
                 </div>
-            </div>
+            </div>  
             <div id="leftmenu">
                 <span class="slide_navigator_top">
 
@@ -40,6 +44,6 @@
                 </div>
             </div>
         </div>
-        <div id="currentlyActiveSlide">slide_1</div>
+        <div id="currentlyActiveSlide"></div>
     </body>
 </html>

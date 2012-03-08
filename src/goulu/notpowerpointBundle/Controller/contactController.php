@@ -13,7 +13,8 @@ class contactController extends Controller
 {
     /**
      *
-     * @Route("/contact/new/") 
+     * @Route("/contact/new")
+     * @Template()
      */
     public function newAction()
     {
@@ -30,11 +31,13 @@ class contactController extends Controller
     
     /**
      *
-     * @Route("/contact/create/") 
+     * @Route("/contact/create")
+     * @Template()
      */
     public function createAction()
     {
         //tallennetaan kantaan uusi kontakti
+        return $this->render('notpowerpointBundle:contact:create.html.twig');
     }
 }
 ?>

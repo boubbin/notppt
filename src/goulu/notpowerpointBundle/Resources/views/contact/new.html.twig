@@ -8,7 +8,7 @@
             <h1>Leave your information here</h1>
         </div>
         <div id="contactForm">
-            <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
+            <form action="{{ path('contact_new') }}" method="post" {{ form_enctype(form) }}>
                 {{ form_widget(form) }}
                 <input type="submit" />
             </form>

@@ -13,7 +13,7 @@ class contactController extends Controller
 {
     /**
      *
-     * Route("/contact/new/") 
+     * @Route("/contact/new/") 
      */
     public function newAction()
     {
@@ -30,7 +30,7 @@ class contactController extends Controller
     
     /**
      *
-     * Route("/contact/create/") 
+     * @Route("/contact/create/") 
      */
     public function createAction()
     {

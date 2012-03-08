@@ -210,4 +210,24 @@ class Slide
     {
         return $this->deleted;
     }
+
+    /**
+     * Set showable
+     *
+     * @param boolean $showable
+     */
+    public function setShowable($showable)
+    {
+        $this->showable = $showable;
+    }
+
+    /**
+     * Get showable
+     *
+     * @return boolean 
+     */
+    public function getShowable()
+    {
+        return $this->showable;
+    }
 }

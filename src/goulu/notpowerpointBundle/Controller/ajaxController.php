@@ -13,7 +13,13 @@ use goulu\notpowerpointBundle\Entity\Slide;
 
 class ajaxController extends Controller
 {
-     /**
+    private $_em;
+    
+    function __construct() {
+        $this->_em = $this->getDoctrine()->getEntityManager();
+    }
+
+    /**
      * @Route("/ajax/slideshow/save")
      */
     public function saveSlideshowAction()
@@ -33,7 +39,7 @@ class ajaxController extends Controller
     function saveNewSlideshow()
     {
         $slideshow    = new Slideshow();
-        $em           = $this->getDoctrine()->getEntityManager();
+        $em           = $this->_em;
         $request      = $this->get('request');
         $name         = $request->request->get('name');
         $slides       = $request->request->get('slides');
@@ -54,7 +60,7 @@ class ajaxController extends Controller
     }
     function updateExistingSlideshow($id)
     {
-        $em           = $this->getDoctrine()->getEntityManager();
+        $em           = $this->_em;
         $request      = $this->get('request');
         $name         = $request->request->get('name');
         $modifieddate = new \DateTime();
@@ -82,7 +88,7 @@ class ajaxController extends Controller
     
     function updateExistingSlide($slide)
     {
-        $em      = $this->getDoctrine()->getEntityManager();
+        $em      = $this->_em;
         $dbslide = $em->getRepository('goulunotpowerpointBundle:Slide')->find($slide['id']);
         if(!$dbslide)
         {
@@ -99,7 +105,7 @@ class ajaxController extends Controller
     
     function saveNewSlide($slide)
     {
-        $em           = $this->getDoctrine()->getEntityManager();
+        $em           = $this->_em;
         $modifieddate = new \DateTime();
         $creationdate = new \DateTime();
         $dbslide      = new Slide();

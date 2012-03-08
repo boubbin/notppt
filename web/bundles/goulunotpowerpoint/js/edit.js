@@ -33,7 +33,7 @@ $(document).ready(function() {
 });
 function saveSlideShow() {
     var id          = $("#slideshowId").val();
-    var name        = $("#slideshow_name").val();
+    var name        = $("#slideshowName").val();
     var slides      = new Array();
     var slide_array;
     $(".slide_wrapper").each(function(num, element) {
@@ -42,17 +42,17 @@ function saveSlideShow() {
             ord      : num,
             duration : Math.random()*9,
             showable : 1,
-            content : $(element).html()
+            content  : $(element).html()
         };
 
         slides[num] = slide_array;
     });
     $.post("/notppt/web/app_dev.php/ajax/slideshow/save", {
-        id     : 'null',
+        id     : id,
         name   : name,
         slides : slides
     }, function(data) {
-        // tell everyone save went ok and stuff
+        if ()
     });
 }
 

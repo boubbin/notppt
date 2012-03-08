@@ -13,11 +13,6 @@ use goulu\notpowerpointBundle\Entity\Slide;
 
 class ajaxController extends Controller
 {
-    private $_em;
-    
-    function __construct() {
-        $this->_em = $this->getDoctrine()->getEntityManager();
-    }
 
     /**
      * @Route("/ajax/slideshow/save")
@@ -26,41 +21,51 @@ class ajaxController extends Controller
     {   
         $request = $this->get('request');
         $id      = $request->request->get('id', 'null');
-        if($id == 'null' || $id == '')
+        if($id == 'null' || empty($id))
         {
-            $this->saveNewSlideshow();
+            $id = $this->saveNewSlideshow();
+            if (empty($id)) {
+                return new Response("Persisting new slideshow failed", 500);
+            }
+            $response = 201;
         }
         else
         {
-            return new Response('id= ' . $id);
-            $this->updateExistingSlideshow($id);
+            if (!$this->updateExistingSlideshow($id)) {
+                return new Response("Saving existing slideslow failed", 500);
+            }
+            $response = 200;
         }
+        return new Response($id, $response);
     }
     function saveNewSlideshow()
     {
-        $slideshow    = new Slideshow();
-        $em           = $this->_em;
         $request      = $this->get('request');
         $name         = $request->request->get('name');
         $slides       = $request->request->get('slides');
+        if (empty($slides)) { return false; }
+        $slideshow    = new Slideshow();
+        $em           = $this->em();
         $creationdate = new \DateTime();
         $modifieddate = new \DateTime();
+        $uuid = $this->gen_uuid();
         foreach($slides as $slide)
         {
-            $this->saveNewSlide($slide);
+            $this->saveNewSlide($uuid, $slide);
         }
-        $slideshow->setName($name)
-                  ->setId($this->gen_uuid())
-                  ->setCreationdate($creationdate)
-                  ->setModifieddate($modifieddate)
-                  ->setPublished(1)
-                  ->setDeleted(0);   
+        $slideshow->setName($name);
+        $slideshow->setId($uuid);
+        $slideshow->setCreationdate($creationdate);
+        $slideshow->setModifieddate($modifieddate);
+        $slideshow->setPublished(1);
+        $slideshow->setDeleted(0);   
         $em->persist($slideshow);
         $em->flush();
+        return $uuid;
     }
     function updateExistingSlideshow($id)
     {
-        $em           = $this->_em;
+        $em           = $this->em();
         $request      = $this->get('request');
         $name         = $request->request->get('name');
         $modifieddate = new \DateTime();
@@ -73,10 +78,10 @@ class ajaxController extends Controller
         }
         else
         {
-            $slideshow->setName($name)
-                      ->setModifieddate($modifieddate)
-                      ->setPublished(1)
-                      ->setDeleted(0);
+            $slideshow->setName($name);
+            $slideshow->setModifieddate($modifieddate);
+            $slideshow->setPublished(1);
+            $slideshow->setDeleted(0);
             $em->persist($slideshow);
             foreach($slides as $slide)
             {
@@ -88,7 +93,7 @@ class ajaxController extends Controller
     
     function updateExistingSlide($slide)
     {
-        $em      = $this->_em;
+        $em      = $this->em();
         $dbslide = $em->getRepository('goulunotpowerpointBundle:Slide')->find($slide['id']);
         if(!$dbslide)
         {
@@ -96,27 +101,27 @@ class ajaxController extends Controller
         }
         else
         {
-            $dbslide->setSlidenumber($slide['ord'])
-                    ->setContent($slide['content'])
-                    ->setShow($slide['showable']);
+            $dbslide->setSlidenumber($slide['ord']);
+            $dbslide->setContent($slide['content']);
+            $dbslide->setShow($slide['showable']);
             $em->persist($dbslide);
         }
     }
     
-    function saveNewSlide($slide)
+    function saveNewSlide($slideShowId, $slide)
     {
-        $em           = $this->_em;
+        $em           = $this->em();
         $modifieddate = new \DateTime();
         $creationdate = new \DateTime();
         $dbslide      = new Slide();
-        $dbslide->setId($this->gen_uuid())
-                ->setSlidenumber($slide['ord'])
-                ->setContent($slide['content'])
-                ->setSlideshowid($this->gen_uuid())
-                ->setCreationdate($creationdate)
-                ->setModifieddate($modifieddate)
-                ->setDeleted(0)
-                ->setShow($slide['showable']);
+        $dbslide->setId($this->gen_uuid());
+        $dbslide->setSlidenumber($slide['ord']);
+        $dbslide->setContent($slide['content']);
+        $dbslide->setSlideshowid($slideShowId);
+        $dbslide->setCreationdate($creationdate);
+        $dbslide->setModifieddate($modifieddate);
+        $dbslide->setDeleted(0);
+        $dbslide->setShow($slide['showable']);
         $em->persist($dbslide);
     }
     
@@ -128,6 +133,9 @@ class ajaxController extends Controller
             mt_rand( 0, 0x3fff ) | 0x8000,
             mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
         );
+    }
+    private function em() {
+        return $this->getDoctrine()->getEntityManager();
     }
 }
 ?>

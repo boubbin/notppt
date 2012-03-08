@@ -26,7 +26,7 @@ class ajaxController extends Controller
     {   
         $request = $this->get('request');
         $id      = $request->request->get('id', 'null');
-        if($id == 'null' | $id == '')
+        if($id == 'null' || $id == '')
         {
             $this->saveNewSlideshow();
         }

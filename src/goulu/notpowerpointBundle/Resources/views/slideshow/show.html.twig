@@ -2,7 +2,9 @@
 
     <head>
         <title>This is not powerpoint</title>
+        <link href="{{ asset('bundles/goulunotpowerpoint/css/showslideshow.css') }}" type="text/css" rel="stylesheet" />
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.bxSlider.min.js') }}" /></script>
         <script type="text/javascript">
         $(document).ready(function(){
@@ -16,15 +18,33 @@
             });
         });
         </script>
-    <body>
+        <script>
+            $(document).ready(function(){
+	$(".trigger").click(function(){
+		$(".panel").toggle("fast");
+		$(this).toggleClass("active");
+		return false;
+	});
+});
+	</script>
     </head>
-    <ul id="slider1">
-        {% for slide in slides %}
-        <li style="background-color:lightblue; height: 100%; width: 100%; position: absolute;">
-            slidenumber = {{ slide.slidenumber }} <br/>
-            {{ slide.content }}
-        </li>
-        {% endfor %}
-    </ul>
-    </body>
+    <body>
+        <ul id="slider1">
+            {% for slide in slides %}
+            <li>
+                slidenumber = {{ slide.slidenumber }} <br/>
+                {{ slide.content }}
+            </li>
+            {% endfor %}
+        </ul>      
+        <div class="panel">
+            <form id="panelform">   
+                Name:<input type="text" name="name" id="name"/><br/>
+                Phone:<input type="text" name="name" id="name"/><br/>
+                Email:<input type="text" name="email" id="email"/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+        <a class="trigger" href="#">Contact!</a>
+    </body>     
 </html>

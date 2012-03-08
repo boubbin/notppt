@@ -52,7 +52,12 @@ function saveSlideShow() {
         name   : name,
         slides : slides
     }, function(data) {
-        if ()
+        if (data != "" && $("#slideshowId").val() == "") {
+            var slidedata = eval('('+data+')');
+            console.log(slidedata);
+        } else {
+            console.log(data);
+        }
     });
 }
 

@@ -21,10 +21,11 @@ class ajaxController extends Controller
     {   
         $request = $this->get('request');
         $id      = $request->request->get('id', 'null');
+        $resp    = "";
         if($id == 'null' || empty($id))
         {
-            $id = $this->saveNewSlideshow();
-            if (empty($id)) {
+            $resp = $this->saveNewSlideshow();
+            if (empty($resp)) {
                 return new Response("Persisting new slideshow failed", 500);
             }
             $response = 201;
@@ -36,7 +37,7 @@ class ajaxController extends Controller
             }
             $response = 200;
         }
-        return new Response($id, $response);
+        return new Response($resp, $response);
     }
     function saveNewSlideshow()
     {
@@ -48,10 +49,11 @@ class ajaxController extends Controller
         $em           = $this->em();
         $creationdate = new \DateTime();
         $modifieddate = new \DateTime();
-        $uuid = $this->gen_uuid();
+        $uuid         = $this->gen_uuid();
+        $slideids     = array();
         foreach($slides as $slide)
         {
-            $this->saveNewSlide($uuid, $slide);
+            $slideids[] = $this->saveNewSlide($uuid, $slide);
         }
         $slideshow->setName($name);
         $slideshow->setId($uuid);
@@ -61,7 +63,7 @@ class ajaxController extends Controller
         $slideshow->setDeleted(0);   
         $em->persist($slideshow);
         $em->flush();
-        return $uuid;
+        return json_encode(array($uuid => $slideids));
     }
     function updateExistingSlideshow($id)
     {
@@ -114,7 +116,8 @@ class ajaxController extends Controller
         $modifieddate = new \DateTime();
         $creationdate = new \DateTime();
         $dbslide      = new Slide();
-        $dbslide->setId($this->gen_uuid());
+        $uuid         = $this->gen_uuid();
+        $dbslide->setId($uuid);
         $dbslide->setSlidenumber($slide['ord']);
         $dbslide->setContent($slide['content']);
         $dbslide->setSlideshowid($slideShowId);
@@ -123,6 +126,7 @@ class ajaxController extends Controller
         $dbslide->setDeleted(0);
         $dbslide->setShow($slide['showable']);
         $em->persist($dbslide);
+        return $uuid;
     }
     
     function gen_uuid() {

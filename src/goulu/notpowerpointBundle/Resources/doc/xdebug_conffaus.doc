@@ -1,0 +1,32 @@
+XDebugin konffaus mac os x:lle:
+
+VAIHTOEHTO 1:
+
+1. Aja komento /Applications/MAMP/bin/php/php5.3.6/bin/pecl install xdebug
+2. Lisää rivi zend_extension="/usr/local/php/modules/xdebug.so" php.ini tiedostoon
+3. Käynnistä apache uudelleen.
+
+VAIHTOEHTO 2:
+
+1. Hae uusin XDebug ja pura se komennolla tar -xzf xdebug-2.1.2.tgz
+HUOM! XDebug jää siihen paikkaan mihin sen lataat ja asennat joten valitse huolellisesti????
+2. Mene xdebugin juureen ja aja komento /Applications/MAMP/bin/php/php5.3.6/bin/phpize
+3. Aja juuressa myös komento ./configure --enable-xdebug
+4. Sekä make
+5. Sekä sudo make install
+6. Lisää php.ini-tiedostoon rivit:
+[xdebug]
+ (zend_extension="zend_extension="/Applications/MAMP/bin/php/php5.3.6/lib/php/extensions/no-debug-non-zts-20090626/xdebug.so"
+")
+xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+
+7. Käynnistä apache uudelleen ja tee php-scripti:
+<?php
+	phpinfo();
+?>
+
+
+JOS ERRORIA TJ NIIN NVG

@@ -19,4 +19,13 @@ CREATE TABLE slideshow (
     published TINYINT(1) NOT NULL,
     deleted TINYINT(1) NOT NULL,
     PRIMARY KEY(id)
-) ENGINE = InnoDB
+) ENGINE = InnoDB;
+
+CREATE TABLE contact (
+    id VARCHAR(255) NOT NULL,
+    creationdate DATETIME NOT NULL,
+    modifieddate DATETIME NOT NULL,
+    deleted TINYINT(1) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+) ENGINE = InnoDB;

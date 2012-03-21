@@ -50,6 +50,7 @@ $(document).ready(function() {
                 var index   = (old_content.length) - 1;
                 new_content = old_content.substr(0, index);
             } else {
+                console.log(e);
                 return
             }
             $(".element_active").html(new_content);

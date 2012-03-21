@@ -40,6 +40,7 @@ $(document).ready(function() {
             if (chr == 13) {
                 new_content = old_content+"<br>";
             } else if (chr == 2) {
+                return false;
                 // esc pressed
             } else if (chr >= 32 && chr < 127) {
                 new_content = old_content+String.fromCharCode(e.which).toLowerCase();
@@ -52,6 +53,7 @@ $(document).ready(function() {
                 return
             }
             $(".element_active").html(new_content);
+            if (chr == 8) { return false; }
         });
         // setActiveSlide($(this).attr(".slide_1"));
 });

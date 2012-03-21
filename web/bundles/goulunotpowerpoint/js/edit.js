@@ -41,8 +41,10 @@ $(document).ready(function() {
                 new_content = old_content+"<br>";
             } else if (chr == 2) {
                 // esc pressed
-            } else if (chr > 31 && chr < 127) {
-                new_content = old_content+String.fromCharCode(e.which);
+            } else if (chr >= 32 && chr < 127) {
+                new_content = old_content+String.fromCharCode(e.which).toLowerCase();
+            } else if(chr == 32) {
+                new_content = old_content+String.fromCharCode(160)
             } else if (chr == 8) {
                 var index   = (old_content.length) - 1;
                 new_content = old_content.substr(0, index);

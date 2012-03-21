@@ -29,8 +29,23 @@ $(document).ready(function() {
                 addNewSlide();
             }
         }); 
+        $(".element").live("click", function() { 
+            makeActive(this);
+        });
+        $(document).keydown(function(e) {
+            var c = String.fromCharCode(e.which)
+            console.log(c);
+            var html = $(".element_active").html();
+            console.log(html);
+            $(".element_active").html(html+c);
+        });
         // setActiveSlide($(this).attr(".slide_1"));
 });
+function makeActive(element) {
+    $(".element_active").addClass("element_inactive");
+    $(".element_active").removeClass("element_active");
+    $(element).addClass("element_active");   
+}
 function saveSlideShow() {
     var id          = $("#slideshowId").val();
     var name        = $("#slideshowName").val();
@@ -63,7 +78,7 @@ function saveSlideShow() {
 
 function getNewTextElement() {
     var as = getActiveSlide();
-    return $('<span class="'+as+' element_text new_element draggable">Text element</span>');
+    return $('<span class="'+as+' element_text new_element draggable element">Text element</span>');
 }
 function getActiveSlide() {
     if ($(".slide").length == 0) {return -1;}
@@ -111,6 +126,7 @@ function makeClassDraggable(element_class) {
         snap           : true,
         snapTolerance  : 3,
         start: function() {
+            makeActive(this);
             removeNewElementDecorationFromNewElement();
             $(this).addClass("element_dragging");
             //addActiveElementDecorationToElement(element);

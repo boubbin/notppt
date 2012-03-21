@@ -3,6 +3,7 @@
  * and configures the area and stuff
 */
 
+
 $(document).ready(function() {
 	$(".slide").live("click", function() {
             clearContent();
@@ -33,11 +34,22 @@ $(document).ready(function() {
             makeActive(this);
         });
         $(document).keydown(function(e) {
-            var c = String.fromCharCode(e.which)
-            console.log(c);
-            var html = $(".element_active").html();
-            console.log(html);
-            $(".element_active").html(html+c);
+            var chr         = e.which;
+            var new_content = '';
+            var old_content = $(".element_active").html();
+            if (chr == 13) {
+                new_content = old_content+"<br>";
+            } else if (chr == 2) {
+                // esc pressed
+            } else if (chr > 31 && chr < 127) {
+                new_content = old_content+String.fromCharCode(e.which);
+            } else if (chr == 8) {
+                var index   = (old_content.length) - 1;
+                new_content = old_content.substr(0, index);
+            } else {
+                return
+            }
+            $(".element_active").html(new_content);
         });
         // setActiveSlide($(this).attr(".slide_1"));
 });

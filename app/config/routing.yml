@@ -1,7 +1,3 @@
-kakkaBlogBundle:
-    resource: "@kakkaBlogBundle/Resources/config/routing.php"
-    prefix:   /
-
 goulunotpowerpointBundle:
     resource: "@goulunotpowerpointBundle/Controller/"
     type:     annotation

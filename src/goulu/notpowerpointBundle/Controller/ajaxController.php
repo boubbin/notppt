@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use goulu\notpowerpointBundle\Entity\Slideshow;
 use goulu\notpowerpointBundle\Entity\Slide;
+use goulu\notpowerpointBundle\Entity\Contact;
 
 
 
@@ -38,6 +39,32 @@ class ajaxController extends Controller
         }
         return new Response($id, $response);
     }
+    
+    /**
+     * @Route("/ajax/contact/save")
+     */
+    public function saveContactAction()
+    {
+        $request = $this->get('request');
+        $name = $request->request->get('name');
+        $phone = $request->request->get('phone');
+        $email = $request->request->get('email');
+        
+        $em = $this->em();
+        $contact = new Contact();
+        $contact->setCreationdate(new \DateTime());
+        $contact->setModifieddate(new \DateTime());
+        $contact->setId($this->gen_uuid());
+        $contact->setEmail($email);
+        $contact->setName($name);
+        $contact->setPhone($phone);
+        $contact->setDeleted(false);
+        $em->persist($contact);
+        $em->flush();
+        
+        return new Response("contact saved!", 201);
+    }
+    
     function saveNewSlideshow()
     {
         $request      = $this->get('request');

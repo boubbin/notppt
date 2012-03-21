@@ -6,6 +6,7 @@
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery-ui.js') }}" /></script>
         <script src="{{ asset('bundles/goulunotpowerpoint/js/jquery.bxSlider.min.js') }}" /></script>
+        <script src="{{ asset('bundles/goulunotpowerpoint/js/submitmail.js') }}" /></script>
         <script type="text/javascript">
         $(document).ready(function(){
             $('#slider1').bxSlider({
@@ -22,6 +23,10 @@
             $(document).ready(function(){
 	$(".trigger").click(function(){
 		$(".panel").toggle("fast");
+                $("#error").empty();
+                $("#name").val('');			
+		$("#phone").val('');
+		$("#email").val('');
 		$(this).toggleClass("active");
 		return false;
 	});
@@ -38,12 +43,14 @@
             {% endfor %}
         </ul>      
         <div class="panel">
-            <form id="panelform">   
-                Name:<input type="text" name="name" id="name"/><br/>
-                Phone:<input type="text" name="name" id="name"/><br/>
-                Email:<input type="text" name="email" id="email"/>
-                <input type="submit" value="Submit"/>
-            </form>
+            <div class="panelform">   
+                Name:<input type="text" id="name"/><br/>
+                Phone:<input type="text" id="phone"/><br/>
+                Email:<input type="text" id="email"/><br/>
+                <button id="submitmail" >Submit</button>
+                <p id="error"></p><br/>
+            </div>
+            
         </div>
         <a class="trigger" href="#">Contact!</a>
     </body>     

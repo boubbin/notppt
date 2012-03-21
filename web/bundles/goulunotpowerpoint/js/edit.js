@@ -3,6 +3,7 @@
  * and configures the area and stuff
 */
 
+
 $(document).ready(function() {
 	$(".slide").live("click", function() {
             clearContent();
@@ -29,8 +30,36 @@ $(document).ready(function() {
                 addNewSlide();
             }
         }); 
+        $(".element").live("click", function() { 
+            makeActive(this);
+        });
+        $(document).keydown(function(e) {
+            var chr         = e.which;
+            var new_content = '';
+            var old_content = $(".element_active").html();
+            if (chr == 13) {
+                new_content = old_content+"<br>";
+            } else if (chr == 2) {
+                // esc pressed
+            } else if (chr >= 32 && chr < 127) {
+                new_content = old_content+String.fromCharCode(e.which).toLowerCase();
+            } else if(chr == 32) {
+                new_content = old_content+String.fromCharCode(160)
+            } else if (chr == 8) {
+                var index   = (old_content.length) - 1;
+                new_content = old_content.substr(0, index);
+            } else {
+                return
+            }
+            $(".element_active").html(new_content);
+        });
         // setActiveSlide($(this).attr(".slide_1"));
 });
+function makeActive(element) {
+    $(".element_active").addClass("element_inactive");
+    $(".element_active").removeClass("element_active");
+    $(element).addClass("element_active");   
+}
 function saveSlideShow() {
     var id          = $("#slideshowId").val();
     var name        = $("#slideshowName").val();
@@ -52,13 +81,18 @@ function saveSlideShow() {
         name   : name,
         slides : slides
     }, function(data) {
-        if ()
+        if (data != "" && $("#slideshowId").val() == "") {
+            var slidedata = eval('('+data+')');
+            console.log(slidedata);
+        } else {
+            console.log(data);
+        }
     });
 }
 
 function getNewTextElement() {
     var as = getActiveSlide();
-    return $('<span class="'+as+' element_text new_element draggable">Text element</span>');
+    return $('<span class="'+as+' element_text new_element draggable element">Text element</span>');
 }
 function getActiveSlide() {
     if ($(".slide").length == 0) {return -1;}
@@ -106,6 +140,7 @@ function makeClassDraggable(element_class) {
         snap           : true,
         snapTolerance  : 3,
         start: function() {
+            makeActive(this);
             removeNewElementDecorationFromNewElement();
             $(this).addClass("element_dragging");
             //addActiveElementDecorationToElement(element);
